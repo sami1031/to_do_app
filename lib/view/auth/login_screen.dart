@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:to_do_app/constants/app_colors.dart';
 import 'package:to_do_app/constants/app_icons.dart';
 import 'package:to_do_app/constants/app_images.dart';
 
@@ -79,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         MaterialPageRoute(
                             builder: (context) => ForgotScreen()));
                   },
-                  child: Text("Forgot Password?")),
+                  child: const Text("Forgot Password?")),
               SizedBox(height: 35.h),
               Commonbutton(
                   titel: 'Sign In',
@@ -92,9 +93,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => AddScreen()));
+                                builder: (context) => const AddScreen()));
                       } catch (e) {
-                        print(e.toString());
+                        Get.snackbar('Error', e.toString(),
+                            backgroundColor: AppColors.red);
                       }
                     }
                   }),
@@ -106,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         MaterialPageRoute(
                             builder: (context) => SignupScreen()));
                   },
-                  child: Text("Dont have an account ? Sign Up"))
+                  child: const Text("Dont have an account ? Sign Up"))
             ],
           ),
         ),
