@@ -71,14 +71,11 @@ class _ForgotScreenState extends State<ForgotScreen> {
                       });
                       await FirebaseAuth.instance
                           .sendPasswordResetEmail(email: emailController.text);
-
-                      Get.to(LoginScreen());
-
+                      Get.snackbar('succes', 'Link send',
+                          backgroundColor: Colors.green);
                       setState(() {
                         loading = false;
                       });
-                      Get.snackbar('succes', 'Link send',
-                          backgroundColor: Colors.green);
                     } on FirebaseAuthException catch (e) {
                       Get.snackbar('Error', 'an error ocured',
                           backgroundColor: Colors.red);

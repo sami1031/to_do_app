@@ -12,40 +12,42 @@ class OnBoarding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 202, left: 25, right: 5),
-            child: Image.asset(AppImages.onBoarding),
-          ),
-          SizedBox(
-            height: 43.h,
-          ),
-          Center(
-            child: Text(
-              'Get things done with TODo',
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 202, left: 25, right: 5),
+              child: Image.asset(AppImages.onBoarding),
             ),
-          ),
-          SizedBox(
-            height: 18.h,
-          ),
-          Text(
-              'Lorem ipsum dolor sit amet,\nconsectetur adipisicing. Maxime,\ntempore! Animi nemo aut atque,\ndeleniti nihil dolorem repellendus.'),
-          SizedBox(
-            height: 55.h,
-          ),
-          Commonbutton(
-              titel: 'Get Started ',
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SignupScreen()));
-              }),
-        ],
+            SizedBox(
+              height: 43.h,
+            ),
+            Center(
+              child: Text(
+                'Get things done with TODo',
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
+              ),
+            ),
+            SizedBox(
+              height: 18.h,
+            ),
+            Text(
+                'Lorem ipsum dolor sit amet,\nconsectetur adipisicing. Maxime,\ntempore! Animi nemo aut atque,\ndeleniti nihil dolorem repellendus.'),
+            SizedBox(
+              height: 55.h,
+            ),
+            Commonbutton(
+                titel: 'Get Started ',
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SignupScreen()));
+                }),
+          ],
+        ),
       ),
     );
   }

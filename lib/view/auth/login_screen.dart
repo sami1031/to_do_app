@@ -23,6 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,20 +84,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: const Text("Forgot Password?")),
               SizedBox(height: 35.h),
               Commonbutton(
+                  isloading: loading,
                   titel: 'Sign In',
                   onTap: () async {
                     if (_formKey.currentState!.validate()) {
                       try {
+                        setState(() {
+                          loading = true;
+                        });
                         await FirebaseAuth.instance.signInWithEmailAndPassword(
                             email: emailController.text,
                             password: passwordController.text);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const AddScreen()));
+                        Get.to(AddScreen());
+                        setState(() {
+                          loading = false;
+                        });
+                        Get.snackbar('succes', 'login');
                       } catch (e) {
                         Get.snackbar('Error', e.toString(),
-                            backgroundColor: AppColors.red);
+                            backgroundColor: Colors.red);
+                        setState(() {
+                          loading = false;
+                        });
                       }
                     }
                   }),

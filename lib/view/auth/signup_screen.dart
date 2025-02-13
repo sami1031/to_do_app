@@ -25,6 +25,7 @@ class _SignupScreenState extends State<SignupScreen> {
       TextEditingController();
   AuthController authController = Get.put(AuthController());
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,15 +100,30 @@ class _SignupScreenState extends State<SignupScreen> {
                   controller: confirmpasswordController),
               SizedBox(height: 100.h),
               Commonbutton(
+                  isloading: loading,
                   titel: 'Sign Up',
                   onTap: () async {
                     if (_formKey.currentState!.validate()) {
-                      await FirebaseAuth.instance
-                          .createUserWithEmailAndPassword(
-                              email: emailController.text,
-                              password: passwordController.text);
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => AddScreen()));
+                      try {
+                        setState(() {
+                          loading = true;
+                        });
+                        await FirebaseAuth.instance
+                            .createUserWithEmailAndPassword(
+                                email: emailController.text,
+                                password: passwordController.text);
+                        Get.to(AddScreen());
+                        setState(() {
+                          loading = false;
+                        });
+                        Get.snackbar('succes', 'your account is created');
+                      } catch (e) {
+                        Get.snackbar('Error', e.toString(),
+                            backgroundColor: Colors.red);
+                        setState(() {
+                          loading = false;
+                        });
+                      }
                     }
                   }),
               SizedBox(height: 30.h),
